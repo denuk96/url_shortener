@@ -15,6 +15,9 @@ development:
       hosts:
         - localhost:27017
       options:
+        user: 'root'
+        password: 'example' # I`m to lazy to replace it by DotEnv..so, I`m not payed for this test task anyway
+        auth_source: admin
       # Note that all options listed below are Ruby driver client options (the mongo gem).
       # Please refer to the driver documentation of the version of the mongo gem you are using
       # for the most up-to-date list of options.
