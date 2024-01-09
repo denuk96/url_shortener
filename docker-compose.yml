@@ -13,15 +13,11 @@ services:
     volumes:
       - .:/rails
       - bundle_data:/usr/local/bundle
-    networks:
-      - app_network
 
   mongo:
     image: mongo:latest
     volumes:
       - mongo_data:/data/db
-    networks:
-      - app_network
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=example
@@ -29,7 +25,3 @@ services:
 volumes:
   mongo_data:
   bundle_data:
-
-networks:
-  app_network:
-    driver: bridge

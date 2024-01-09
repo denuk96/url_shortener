@@ -30,6 +30,10 @@ RUN bundle install && \
 # Copy application code
 COPY . .
 
+# Ensure proper permissions on the tmp directory
+RUN mkdir -p tmp/pids && \
+    chmod -R 777 tmp
+
 # Precompile bootsnap code for faster boot times
 RUN bundle exec bootsnap precompile app/ lib/
 
