@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :links, only: %i[create show destroy], param: :slug
+  resources :links, only: %i[create show update destroy], param: :slug
   get '/:slug', to: "links#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

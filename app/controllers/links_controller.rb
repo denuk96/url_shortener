@@ -1,6 +1,7 @@
 class LinksController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :fetch_link, only: %i[index show destroy]
+  before_action :fetch_link, only: %i[index show update destroy]
+  before_action :authorize!, only: %i[update destroy]
 
   def index
     @link.increment_view!
@@ -22,14 +23,18 @@ class LinksController < ApplicationController
     end
   end
 
-  def destroy
-    if @link.authenticate(params[:password])
-      @link.destroy!
-
-      head :ok
+  def update
+    if @link.update(link_params)
+      render json: LinkSerializer.new(@link), status: :created
     else
-      head :unauthorized
+      render json: ErrorSerializer.new(@link), status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @link.destroy!
+
+    head :ok
   end
 
   private
@@ -40,5 +45,9 @@ class LinksController < ApplicationController
 
   def link_params
     params.permit(:original_url, :password)
+  end
+
+  def authorize!
+    head :unauthorized unless @link.authenticate(params[:password])
   end
 end
