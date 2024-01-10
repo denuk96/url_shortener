@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :fetch_link, only: %i[index show]
+  before_action :fetch_link, only: %i[index show destroy]
 
   def index
     @link.increment_view!
@@ -19,6 +19,16 @@ class LinksController < ApplicationController
       render json: LinkSerializer.new(link), status: :created
     else
       render json: ErrorSerializer.new(link), status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @link.authenticate(params[:password])
+      @link.destroy!
+
+      head :ok
+    else
+      head :unauthorized
     end
   end
 

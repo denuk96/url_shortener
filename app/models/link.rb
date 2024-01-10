@@ -19,6 +19,10 @@ class Link
     update(view_count: view_count + 1)
   end
 
+  def authenticate(password)
+    BCrypt::Password.new(password_digest) == password if password_digest.present?
+  end
+
   private
 
   def generate_unique_slug
@@ -36,9 +40,5 @@ class Link
 
   def password=(new_password)
     self.password_digest = BCrypt::Password.create(new_password) if new_password.present?
-  end
-
-  def authenticate(password)
-    BCrypt::Password.new(password_digest) == password if password_digest.present?
   end
 end
