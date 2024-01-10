@@ -23,3 +23,9 @@ Implement a simple service for link minimization.
 - **Pagination**: Implement pagination in the admin panel.
 - **Auto-Deletion**: Implement a feature to delete links with no visits for more than two months (could be a button in the admin panel).
 - **Search Functionality**: Implement search in the admin panel.
+
+### How to run it? 
+```bash
+  docker-compose build
+  docuer-compose up
+```
