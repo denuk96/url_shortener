@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get '/:slug', to: "links#index"
 
   namespace :admin do
-    resources :links, only: %i[index destroy], param: :slug
+    resources :links, only: %i[index destroy], param: :slug do
+      delete 'destroy_old', on: :collection
+    end
   end
 end

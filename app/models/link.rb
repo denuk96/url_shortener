@@ -21,6 +21,12 @@ class Link
 
   before_validation :generate_unique_slug
 
+  # If a link has not been visited, it's not being updated.
+  def self.delete_old_links(duration = 2)
+    threshold_time = duration.to_i.months.ago
+    where(:updated_at.lt => threshold_time).destroy_all
+  end
+
   def self.search(term)
     regex = /#{Regexp.escape(term)}/i
     any_of({ slug: regex }, { original_url: regex })

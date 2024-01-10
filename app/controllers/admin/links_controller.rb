@@ -13,4 +13,10 @@ class Admin::LinksController < Admin::ApplicationController
       redirect_to :back, alert: @link.errors.full_messages.join(', ')
     end
   end
+
+  def destroy_old
+    Link.delete_old_links(params[:duration] || 2)
+
+    redirect_to admin_links_path
+  end
 end

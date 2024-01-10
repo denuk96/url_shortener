@@ -2,6 +2,7 @@
   = form_tag('', method: :get, class: 'd-flex mb-2') do
     = text_field_tag(:search, params[:search], class: 'form-control me-2', placeholder: 'Search among original_url and slug', aria: {label: 'Search'})
     = submit_tag('Search', class: 'btn btn-outline-success', type: 'submit')
+  = button_to "Destroy Old", destroy_old_admin_links_path(duration: 2), class: "btn btn-danger", method: :delete, data: {turbo_confirm: 'Are you sure you want to delete the links? Cant be reversed'}
 
 .container.mx-auto.justify-content-center.align-items-center
   %table.table.table-fixed.table-bordered.table-striped
