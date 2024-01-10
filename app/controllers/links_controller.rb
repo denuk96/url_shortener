@@ -1,11 +1,15 @@
 class LinksController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :fetch_link, only: %i[index]
+  before_action :fetch_link, only: %i[index show]
 
   def index
     @link.increment_view!
 
     redirect_to @link.original_url, allow_other_host: true
+  end
+
+  def show
+    render json: LinkSerializer.new(@link), status: :ok
   end
 
   def create
