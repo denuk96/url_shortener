@@ -4,7 +4,7 @@ class LinksController < ApplicationController
   before_action :authorize!, only: %i[update destroy]
 
   def index
-    @link.increment_view!
+    @link.increment_view! # TODO: make it async in batches
 
     redirect_to @link.original_url, allow_other_host: true
   end

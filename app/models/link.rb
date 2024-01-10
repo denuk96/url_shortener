@@ -1,3 +1,9 @@
+# MongoDB is often chosen for URL shortener services due to its excellent scalability and performance.
+# It handles high traffic and data growth efficiently through horizontal scaling, and offers fast read performance,
+# crucial for quickly retrieving original URLs from shortened ones.
+# This combination of easy scalability and speed makes it a suitable choice for high-traffic,
+# data-intensive applications.
+
 class Link
   include Mongoid::Document
   include Mongoid::Timestamps
