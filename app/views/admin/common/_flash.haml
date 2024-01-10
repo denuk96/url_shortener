@@ -1,0 +1,9 @@
+- if flash[:notice].present?
+  .alert.alert-primary{role: "alert"}
+    .container
+      = flash[:notice]
+
+- if flash[:alert].present?
+  .alert.alert-danger{role: "alert"}
+    .container
+      = flash[:alert]

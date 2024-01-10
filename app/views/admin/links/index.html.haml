@@ -1,0 +1,34 @@
+.container.mx-auto.justify-content-center.mt-3
+  = form_tag('', method: :get, class: 'd-flex mb-2') do
+    = text_field_tag(:search, params[:search], class: 'form-control me-2', placeholder: 'Search among original_url and slug', aria: {label: 'Search'})
+    = submit_tag('Search', class: 'btn btn-outline-success', type: 'submit')
+
+.container.mx-auto.justify-content-center.align-items-center
+  %table.table.table-fixed.table-bordered.table-striped
+    %thead
+      %tr
+        %th ID
+        %th Slug
+        %th View Count
+        %th original_url
+        %th Created At
+        %th Updated At
+        %th Actions
+
+    %tbody
+      - @links.each do |link|
+        %tr
+          %td= link.id
+          %td= link.slug
+          %td= link.view_count
+          %td= link_to link.original_url.truncate(30), link.original_url
+          %td= l link.created_at, format: :short, locale: :en
+          %td= l link.updated_at, format: :short, locale: :en
+          %td
+            .d-flex.flex-row
+              = button_to "Delete", admin_link_path(link.slug), class: "btn btn-danger", style: 'margin-left: 10px', method: :delete, data: {turbo_confirm: 'Are you sure you want to delete the link? Cant be reversed'}
+
+    %tfoot
+      %tr
+        %td{ colspan: 6 }
+          = paginate @links

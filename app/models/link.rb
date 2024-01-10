@@ -15,6 +15,11 @@ class Link
 
   before_validation :generate_unique_slug
 
+  def self.search(term)
+    regex = /#{Regexp.escape(term)}/i
+    any_of({ slug: regex }, { original_url: regex })
+  end
+
   def increment_view!
     update(view_count: view_count + 1)
   end
