@@ -15,9 +15,15 @@ class Link
 
   before_validation :generate_unique_slug
 
+  def increment_view!
+    update(view_count: view_count + 1)
+  end
+
   private
 
   def generate_unique_slug
+    return if slug
+
     loop do
       self.slug = generate_random_slug
       break unless Link.where(slug: self.slug).exists?

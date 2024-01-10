@@ -3,6 +3,8 @@ class LinksController < ApplicationController
   before_action :fetch_link, only: %i[index]
 
   def index
+    @link.increment_view!
+
     redirect_to @link.original_url, allow_other_host: true
   end
 
