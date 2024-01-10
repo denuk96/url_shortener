@@ -7,8 +7,9 @@ class Link
   field :original_url, type: String
   field :slug, type: String
 
-  validates :original_url, presence: true
+  validates :original_url, presence: true, format: { with: URI.regexp }
   validates :slug, uniqueness: true, presence: true
+  validates :password_digest, presence: true
 
   index({ slug: 1 }, { unique: true })
 
